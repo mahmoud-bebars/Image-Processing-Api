@@ -14,11 +14,6 @@ import imageResizer from '../modules/imageSizer'
 const request = supertest(server)
 
 describe('Endpoint Response testing', () => {
-  it('server should respond with status code 200 Ok at route /', async () => {
-    const response = await request.get('/')
-    expect(response.status).toBe(200)
-  })
-
   it('should respond with status code 200 Ok when api parmeters exists at route /resize?', async () => {
     const response = await request.get(
       '/resize?name=fjord&width=200&height=100'

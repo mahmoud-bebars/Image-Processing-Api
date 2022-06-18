@@ -3,13 +3,6 @@ import imageResizer from '../modules/imageSizer'
 
 const Router = express.Router()
 
-// GET Route to welcome the user in the app
-Router.get('/', (req: Request, res: Response) => {
-  res.json({
-    msg: 'Server is Running successfully... 💬',
-  })
-})
-
 // GET Route handling the resize process
 // the api takes 3 main queries (filename, width,height)
 Router.get('/resize', async (req: Request, res: Response) => {
