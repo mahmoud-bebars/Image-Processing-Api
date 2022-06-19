@@ -8,18 +8,16 @@ const imageResizer = async (
   height: string
 ): Promise<{ sized: boolean; file: string; err: string }> => {
   try {
-    // the input file path
+    // the input & output file paths
     const input = path.join(process.cwd(), `/public/assets/${name}.jpg`)
-
-    // file output path
     const output = path.join(process.cwd(), '/public/thumbnails')
 
-    // check that ths file name exists in the assests folder
-    if (!fs.existsSync(input))
+    // check if the file name exists in the assests folder with the same params
+    if (fs.existsSync(`${output}/${name}_${width}_${height}.jpg`))
       return {
-        sized: false as boolean,
-        file: '' as string,
-        err: `file with name:${name} can not be found`,
+        sized: true as boolean,
+        file: (output + `/${name}_${width}_${height}.jpg`) as string,
+        err: '' as string,
       }
 
     // check if the output folder doesn't exists
@@ -29,6 +27,7 @@ const imageResizer = async (
     await sharp(input)
       .resize(+width, +height)
       .toFile(output + `/${name}_${width}_${height}.jpg`)
+
     // retruns the resized file to the browser
     return {
       sized: true as boolean,
